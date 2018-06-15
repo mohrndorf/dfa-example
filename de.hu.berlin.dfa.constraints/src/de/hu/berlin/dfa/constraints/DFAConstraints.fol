@@ -1,0 +1,5 @@
+// domain: The namespace URI (nsURI) property of the ecore meta-model EPackage.
+// import: The java import path of generated java class which represents the model package.
+domain "http://www.hu-berlin.de/dfamodel/1.0" import "de.hu.berlin.dfa.model.dfamodel.DfamodelPackage"
+
+// TODO: Add your DFA constraints here...

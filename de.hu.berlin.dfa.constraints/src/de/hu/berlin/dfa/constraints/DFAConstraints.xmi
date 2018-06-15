@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="ASCII"?>
+<firstOrderLogic:ConstraintLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:firstOrderLogic="http://www.sidiff.org/validation/laguage/fol/FirstOrderLogic" domain="http://www.hu-berlin.de/dfamodel/1.0" packageImport="de.hu.berlin.dfa.model.dfamodel.DfamodelPackage"/>

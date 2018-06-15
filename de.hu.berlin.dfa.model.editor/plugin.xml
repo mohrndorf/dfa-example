@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated dfamodel -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="de.hu.berlin.dfa.model.dfamodel.presentation.DfamodelModelWizardID"
+            name="%_UI_DfamodelModelWizard_label"
+            class="de.hu.berlin.dfa.model.dfamodel.presentation.DfamodelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DfamodelModelFile.gif">
+         <description>%_UI_DfamodelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated dfamodel -->
+      <editor
+            id="de.hu.berlin.dfa.model.dfamodel.presentation.DfamodelEditorID"
+            name="%_UI_DfamodelEditor_label"
+            icon="icons/full/obj16/DfamodelModelFile.gif"
+            extensions="dfamodel"
+            class="de.hu.berlin.dfa.model.dfamodel.presentation.DfamodelEditor"
+            contributorClass="de.hu.berlin.dfa.model.dfamodel.presentation.DfamodelActionBarContributor">
+      </editor>
+   </extension>
+</plugin>

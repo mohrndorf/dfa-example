@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DFA Constraints
+Bundle-SymbolicName: de.hu.berlin.dfa.constraints;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.sidiff.validation.constraint.api,
+ org.sidiff.validation.constraint.interpreter,
+ de.hu.berlin.dfa.model

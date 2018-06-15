@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DFA Edit Rules
+Bundle-SymbolicName: de.hu.berlin.dfa.editrules;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.sidiff.repair.editrules,
+ de.hu.berlin.dfa.model
