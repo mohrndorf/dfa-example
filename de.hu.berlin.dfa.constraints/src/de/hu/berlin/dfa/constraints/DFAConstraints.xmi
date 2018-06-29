@@ -1,2 +1,120 @@
 <?xml version="1.0" encoding="ASCII"?>
-<firstOrderLogic:ConstraintLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:firstOrderLogic="http://www.sidiff.org/validation/laguage/fol/FirstOrderLogic" domain="http://www.hu-berlin.de/dfamodel/1.0" packageImport="de.hu.berlin.dfa.model.dfamodel.DfamodelPackage"/>
+<firstOrderLogic:ConstraintLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:firstOrderLogic="http://www.sidiff.org/validation/laguage/fol/FirstOrderLogic" domain="http://www.hu-berlin.de/dfamodel/1.0" packageImport="de.hu.berlin.dfa.model.dfamodel.DfamodelPackage">
+  <constraints name="JederDFABrauchtMindestensEinenZustand" message="Jeder DFA braucht mindestens einen Zustand">
+    <variable name="dfa">
+      <type xsi:type="ecore:EClass" href="http://www.hu-berlin.de/dfamodel/1.0#//DFA"/>
+    </variable>
+    <formula xsi:type="firstOrderLogic:Greater">
+      <left xsi:type="firstOrderLogic:Size">
+        <elements xsi:type="firstOrderLogic:VariableRef" name="//@constraints.0/@variable">
+          <get>
+            <name xsi:type="ecore:EReference" href="http://www.hu-berlin.de/dfamodel/1.0#//DFA/states"/>
+          </get>
+        </elements>
+      </left>
+      <right xsi:type="firstOrderLogic:IntConstant"/>
+    </formula>
+  </constraints>
+  <constraints name="GenauEinEinzigerZustandMussIsStartTrueHaben" message="Genau ein einziger Zustand muss isStart == true haben">
+    <variable name="dfa">
+      <type xsi:type="ecore:EClass" href="http://www.hu-berlin.de/dfamodel/1.0#//DFA"/>
+    </variable>
+    <formula xsi:type="firstOrderLogic:Exists">
+      <name name="startState">
+        <type xsi:type="ecore:EClass" href="http://www.hu-berlin.de/dfamodel/1.0#//State"/>
+      </name>
+      <iteration xsi:type="firstOrderLogic:VariableRef" name="//@constraints.1/@variable">
+        <get>
+          <name xsi:type="ecore:EReference" href="http://www.hu-berlin.de/dfamodel/1.0#//DFA/states"/>
+        </get>
+      </iteration>
+      <formula xsi:type="firstOrderLogic:And">
+        <left xsi:type="firstOrderLogic:Equals">
+          <left xsi:type="firstOrderLogic:VariableRef" name="//@constraints.1/@formula/@name">
+            <get>
+              <name xsi:type="ecore:EAttribute" href="http://www.hu-berlin.de/dfamodel/1.0#//State/isStart"/>
+            </get>
+          </left>
+          <right xsi:type="firstOrderLogic:BoolConstant" value="true"/>
+        </left>
+        <right xsi:type="firstOrderLogic:Not">
+          <not xsi:type="firstOrderLogic:Exists">
+            <name name="otherState">
+              <type xsi:type="ecore:EClass" href="http://www.hu-berlin.de/dfamodel/1.0#//State"/>
+            </name>
+            <iteration xsi:type="firstOrderLogic:VariableRef" name="//@constraints.1/@variable">
+              <get>
+                <name xsi:type="ecore:EReference" href="http://www.hu-berlin.de/dfamodel/1.0#//DFA/states"/>
+              </get>
+            </iteration>
+            <formula xsi:type="firstOrderLogic:And">
+              <left xsi:type="firstOrderLogic:Not">
+                <not xsi:type="firstOrderLogic:Equals">
+                  <left xsi:type="firstOrderLogic:VariableRef" name="//@constraints.1/@formula/@name"/>
+                  <right xsi:type="firstOrderLogic:VariableRef" name="//@constraints.1/@formula/@formula/@right/@not/@name"/>
+                </not>
+              </left>
+              <right xsi:type="firstOrderLogic:Equals">
+                <left xsi:type="firstOrderLogic:VariableRef" name="//@constraints.1/@formula/@formula/@right/@not/@name">
+                  <get>
+                    <name xsi:type="ecore:EAttribute" href="http://www.hu-berlin.de/dfamodel/1.0#//State/isStart"/>
+                  </get>
+                </left>
+                <right xsi:type="firstOrderLogic:BoolConstant" value="true"/>
+              </right>
+            </formula>
+          </not>
+        </right>
+      </formula>
+    </formula>
+  </constraints>
+  <constraints name="EsSollteMindestensEinenEndzustandGeben" message="Es sollte mindestens einen Endzustand geben">
+    <variable name="dfa">
+      <type xsi:type="ecore:EClass" href="http://www.hu-berlin.de/dfamodel/1.0#//DFA"/>
+    </variable>
+    <formula xsi:type="firstOrderLogic:Exists">
+      <name name="s">
+        <type xsi:type="ecore:EClass" href="http://www.hu-berlin.de/dfamodel/1.0#//State"/>
+      </name>
+      <iteration xsi:type="firstOrderLogic:VariableRef" name="//@constraints.2/@variable">
+        <get>
+          <name xsi:type="ecore:EReference" href="http://www.hu-berlin.de/dfamodel/1.0#//DFA/states"/>
+        </get>
+      </iteration>
+      <formula xsi:type="firstOrderLogic:Equals">
+        <left xsi:type="firstOrderLogic:VariableRef" name="//@constraints.2/@formula/@name">
+          <get>
+            <name xsi:type="ecore:EAttribute" href="http://www.hu-berlin.de/dfamodel/1.0#//State/isEnd"/>
+          </get>
+        </left>
+        <right xsi:type="firstOrderLogic:BoolConstant" value="true"/>
+      </formula>
+    </formula>
+  </constraints>
+  <constraints name="UebergaengeDuerfenNichtMitNullOderLeerGelabeltSein" message="&#xdc;berg&#xe4;nge d&#xfc;rfen nicht mit null oder leer gelabelt sein">
+    <variable name="transition">
+      <type xsi:type="ecore:EClass" href="http://www.hu-berlin.de/dfamodel/1.0#//Transition"/>
+    </variable>
+    <formula xsi:type="firstOrderLogic:And">
+      <left xsi:type="firstOrderLogic:Not">
+        <not xsi:type="firstOrderLogic:IsEmpty">
+          <term xsi:type="firstOrderLogic:VariableRef" name="//@constraints.3/@variable">
+            <get>
+              <name xsi:type="ecore:EAttribute" href="http://www.hu-berlin.de/dfamodel/1.0#//Transition/input"/>
+            </get>
+          </term>
+        </not>
+      </left>
+      <right xsi:type="firstOrderLogic:Not">
+        <not xsi:type="firstOrderLogic:Equals">
+          <left xsi:type="firstOrderLogic:VariableRef" name="//@constraints.3/@variable">
+            <get>
+              <name xsi:type="ecore:EAttribute" href="http://www.hu-berlin.de/dfamodel/1.0#//Transition/input"/>
+            </get>
+          </left>
+          <right xsi:type="firstOrderLogic:StringConstant" value=""/>
+        </not>
+      </right>
+    </formula>
+  </constraints>
+</firstOrderLogic:ConstraintLibrary>

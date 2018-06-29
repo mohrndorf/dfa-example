@@ -2,4 +2,28 @@
 // import: The java import path of generated java class which represents the model package.
 domain "http://www.hu-berlin.de/dfamodel/1.0" import "de.hu.berlin.dfa.model.dfamodel.DfamodelPackage"
 
+constraint JederDFABrauchtMindestensEinenZustand 
+message 'Jeder DFA braucht mindestens einen Zustand' 
+context DFA dfa : isGreater(size(dfa.states), 0)
+
+constraint GenauEinEinzigerZustandMussIsStartTrueHaben
+message 'Genau ein einziger Zustand muss isStart == true haben'
+context DFA dfa : 
+	// it exists one state with isStart == true
+	exists(State startState in dfa.states : 
+		isEqual(startState.isStart, true) and 
+		// so that no other state is isStart == true
+		not(exists(State otherState in dfa.states : 
+			not(isEqual(startState, otherState)) and isEqual(otherState.isStart, true)
+		))
+	)
+
+constraint EsSollteMindestensEinenEndzustandGeben
+message 'Es sollte mindestens einen Endzustand geben'
+context DFA dfa : exists(State s in dfa.states : isEqual(s.isEnd, true)) 
+
+constraint UebergaengeDuerfenNichtMitNullOderLeerGelabeltSein
+message 'Übergänge dürfen nicht mit null oder leer gelabelt sein'
+context Transition transition : not(isEmpty(transition.input)) and not(isEqual(transition.input, ''))
+
 // TODO: Add your DFA constraints here...

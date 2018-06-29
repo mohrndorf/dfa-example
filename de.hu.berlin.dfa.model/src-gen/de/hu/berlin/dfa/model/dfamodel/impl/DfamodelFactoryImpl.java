@@ -58,6 +58,10 @@ public class DfamodelFactoryImpl extends EFactoryImpl implements DfamodelFactory
 		switch (eClass.getClassifierID()) {
 		case DfamodelPackage.DFA:
 			return createDFA();
+		case DfamodelPackage.TRANSITION:
+			return createTransition();
+		case DfamodelPackage.STATE:
+			return createState();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -71,6 +75,26 @@ public class DfamodelFactoryImpl extends EFactoryImpl implements DfamodelFactory
 	public DFA createDFA() {
 		DFAImpl dfa = new DFAImpl();
 		return dfa;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Transition createTransition() {
+		TransitionImpl transition = new TransitionImpl();
+		return transition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public State createState() {
+		StateImpl state = new StateImpl();
+		return state;
 	}
 
 	/**

@@ -2,9 +2,9 @@
  */
 package de.hu.berlin.dfa.model.dfamodel.provider;
 
-import de.hu.berlin.dfa.model.dfamodel.DFA;
-import de.hu.berlin.dfa.model.dfamodel.DfamodelFactory;
 import de.hu.berlin.dfa.model.dfamodel.DfamodelPackage;
+import de.hu.berlin.dfa.model.dfamodel.Transition;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -13,23 +13,24 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link de.hu.berlin.dfa.model.dfamodel.DFA} object.
+ * This is the item provider adapter for a {@link de.hu.berlin.dfa.model.dfamodel.Transition} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DFAItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class TransitionItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -37,7 +38,7 @@ public class DFAItemProvider extends ItemProviderAdapter implements IEditingDoma
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DFAItemProvider(AdapterFactory adapterFactory) {
+	public TransitionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -52,50 +53,68 @@ public class DFAItemProvider extends ItemProviderAdapter implements IEditingDoma
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addFromPropertyDescriptor(object);
+			addToPropertyDescriptor(object);
+			addInputPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the From feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(DfamodelPackage.Literals.DFA__STATES);
-			childrenFeatures.add(DfamodelPackage.Literals.DFA__TRANSITIONS);
-		}
-		return childrenFeatures;
+	protected void addFromPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Transition_from_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Transition_from_feature",
+								"_UI_Transition_type"),
+						DfamodelPackage.Literals.TRANSITION__FROM, true, false, true, null, null, null));
 	}
 
 	/**
+	 * This adds a property descriptor for the To feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addToPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Transition_to_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Transition_to_feature",
+								"_UI_Transition_type"),
+						DfamodelPackage.Literals.TRANSITION__TO, true, false, true, null, null, null));
 	}
 
 	/**
-	 * This returns DFA.gif.
+	 * This adds a property descriptor for the Input feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInputPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Transition_input_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Transition_input_feature",
+								"_UI_Transition_type"),
+						DfamodelPackage.Literals.TRANSITION__INPUT, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This returns Transition.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DFA"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Transition"));
 	}
 
 	/**
@@ -116,7 +135,9 @@ public class DFAItemProvider extends ItemProviderAdapter implements IEditingDoma
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_DFA_type");
+		String label = ((Transition) object).getInput();
+		return label == null || label.length() == 0 ? getString("_UI_Transition_type")
+				: getString("_UI_Transition_type") + " " + label;
 	}
 
 	/**
@@ -130,10 +151,9 @@ public class DFAItemProvider extends ItemProviderAdapter implements IEditingDoma
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(DFA.class)) {
-		case DfamodelPackage.DFA__STATES:
-		case DfamodelPackage.DFA__TRANSITIONS:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+		switch (notification.getFeatureID(Transition.class)) {
+		case DfamodelPackage.TRANSITION__INPUT:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -149,12 +169,6 @@ public class DFAItemProvider extends ItemProviderAdapter implements IEditingDoma
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add(
-				createChildParameter(DfamodelPackage.Literals.DFA__STATES, DfamodelFactory.eINSTANCE.createState()));
-
-		newChildDescriptors.add(createChildParameter(DfamodelPackage.Literals.DFA__TRANSITIONS,
-				DfamodelFactory.eINSTANCE.createTransition()));
 	}
 
 	/**

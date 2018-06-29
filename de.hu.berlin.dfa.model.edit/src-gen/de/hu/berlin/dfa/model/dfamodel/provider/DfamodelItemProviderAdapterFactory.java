@@ -96,6 +96,52 @@ public class DfamodelItemProviderAdapterFactory extends DfamodelAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.hu.berlin.dfa.model.dfamodel.Transition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TransitionItemProvider transitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.hu.berlin.dfa.model.dfamodel.Transition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTransitionAdapter() {
+		if (transitionItemProvider == null) {
+			transitionItemProvider = new TransitionItemProvider(this);
+		}
+
+		return transitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.hu.berlin.dfa.model.dfamodel.State} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StateItemProvider stateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.hu.berlin.dfa.model.dfamodel.State}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStateAdapter() {
+		if (stateItemProvider == null) {
+			stateItemProvider = new StateItemProvider(this);
+		}
+
+		return stateItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -196,6 +242,10 @@ public class DfamodelItemProviderAdapterFactory extends DfamodelAdapterFactory
 	public void dispose() {
 		if (dfaItemProvider != null)
 			dfaItemProvider.dispose();
+		if (transitionItemProvider != null)
+			transitionItemProvider.dispose();
+		if (stateItemProvider != null)
+			stateItemProvider.dispose();
 	}
 
 }

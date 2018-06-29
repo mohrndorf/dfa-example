@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_bfi6MHuZEeiS6tlx6aOZyg" name="createInitialState">
+  <imports href="http://www.hu-berlin.de/dfamodel/1.0#/"/>
+  <units xsi:type="henshin:SequentialUnit" xmi:id="_bfi6MXuZEeiS6tlx6aOZyg" name="mainUnit" subUnits="_bfi6NHuZEeiS6tlx6aOZyg">
+    <parameters xmi:id="_bfi6MnuZEeiS6tlx6aOZyg" name="state"/>
+    <parameterMappings xmi:id="_bfi6M3uZEeiS6tlx6aOZyg" source="_bfi6NXuZEeiS6tlx6aOZyg" target="_bfi6MnuZEeiS6tlx6aOZyg"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_bfi6NHuZEeiS6tlx6aOZyg" name="createInitialState">
+    <parameters xmi:id="_bfi6NXuZEeiS6tlx6aOZyg" name="state" kind="OUT"/>
+    <lhs xmi:id="_bfi6NnuZEeiS6tlx6aOZyg" name="Lhs"/>
+    <rhs xmi:id="_bfi6OHuZEeiS6tlx6aOZyg" name="Rhs">
+      <nodes xmi:id="_bfi6N3uZEeiS6tlx6aOZyg" name="dfa" outgoing="_bfi6PXuZEeiS6tlx6aOZyg">
+        <type href="http://www.hu-berlin.de/dfamodel/1.0#//DFA"/>
+      </nodes>
+      <nodes xmi:id="_bfi6OnuZEeiS6tlx6aOZyg" name="state" incoming="_bfi6PXuZEeiS6tlx6aOZyg">
+        <type href="http://www.hu-berlin.de/dfamodel/1.0#//State"/>
+        <attributes xmi:id="_bfi6O3uZEeiS6tlx6aOZyg" value="true">
+          <type href="http://www.hu-berlin.de/dfamodel/1.0#//State/isStart"/>
+        </attributes>
+        <attributes xmi:id="_bfi6PHuZEeiS6tlx6aOZyg" value="false">
+          <type href="http://www.hu-berlin.de/dfamodel/1.0#//State/isEnd"/>
+        </attributes>
+      </nodes>
+      <edges xmi:id="_bfi6PXuZEeiS6tlx6aOZyg" source="_bfi6N3uZEeiS6tlx6aOZyg" target="_bfi6OnuZEeiS6tlx6aOZyg">
+        <type href="http://www.hu-berlin.de/dfamodel/1.0#//DFA/states"/>
+      </edges>
+    </rhs>
+  </units>
+</henshin:Module>
